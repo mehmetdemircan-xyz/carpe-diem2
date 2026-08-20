@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-ink-950 text-chalk-50 font-sans antialiased;
+    /* Prevent the whole page from bouncing on iOS while in a room. */
+    overscroll-behavior: none;
+  }
+
+  /* Visible, consistent focus ring. Keyboard users need this; mouse users
+     never see it because :focus-visible does the filtering. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-ink-950;
+  }
+
+  /* Form fields already turn their border accent on focus. The offset ring on
+     top of that reads as a double halo, so they get a tighter one. */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply ring-1 ring-offset-0;
+  }
+
+  ::selection {
+    background-color: rgba(91, 140, 255, 0.28);
+  }
+
+  /* Slim scrollbars so panels do not gain a chunky light-grey gutter. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #333947 transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-ink-700;
+  }
+
+  /* Honour the OS setting. Nothing here is load-bearing. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-lg
+           px-4 py-2.5 text-sm font-medium transition-colors
+           disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-ink-950 hover:bg-accent-hover;
+  }
+
+  .btn-secondary {
+    @apply btn border border-ink-700 bg-ink-850 text-chalk-50 hover:border-ink-600 hover:bg-ink-800;
+  }
+
+  .btn-ghost {
+    @apply btn text-chalk-200 hover:bg-ink-800 hover:text-chalk-50;
+  }
+
+  .btn-danger {
+    @apply btn bg-signal-bad/15 text-signal-bad hover:bg-signal-bad/25;
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-ink-700 bg-ink-900 px-4 py-3 text-chalk-50
+           placeholder:text-chalk-600 transition-colors
+           focus:border-accent focus:outline-none;
+  }
+
+  .panel {
+    @apply border border-ink-800 bg-ink-900;
+  }
+
+  /* The one place a blur is worth its cost: the control bar sits over live
+     video, where a flat fill would fight the picture. */
+  .control-surface {
+    @apply border-ink-800 bg-ink-900/95;
+    backdrop-filter: saturate(140%) blur(8px);
+  }
+}
