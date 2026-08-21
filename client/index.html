@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <!--
+      interactive-widget=resizes-content makes the on-screen keyboard shrink
+      the layout viewport instead of covering it. Without it the browser
+      scrolls the focused input into view by pushing the page up, which slides
+      the video off the top of the screen the moment you start typing.
+    -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#08090c" />
+    <title>CARPE Diem. — Screen sharing, simplified.</title>
+    <meta
+      name="description"
+      content="Create a room, share the code, share your screen. No account required."
+    />
+    <!-- Rooms must never be indexed or previewed by a crawler. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
